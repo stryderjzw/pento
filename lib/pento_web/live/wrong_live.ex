@@ -1,11 +1,18 @@
 defmodule PentoWeb.WrongLive do
   use PentoWeb, :live_view
 
-  def mount(_params, _session, socket) do
+  def mount(_params, session, socket) do
     random_number = Enum.random(1..10)
 
     {:ok,
-     assign(socket, game_ended: false, score: 0, answer: random_number, message: "Make a guess:")}
+     assign(
+       socket,
+       game_ended: false,
+       score: 0,
+       answer: random_number,
+       message: "Make a guess:",
+       session_id: session["live_socket_id"]
+     )}
   end
 
   @spec render(any) :: Phoenix.LiveView.Rendered.t()
@@ -27,7 +34,7 @@ defmodule PentoWeb.WrongLive do
       <% end %>
     </h2>
     <br />
-    <h2>
+    <h2 class="mb-8">
       <%= for n <- 1..10 do %>
         <.link
           class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded m-1"
@@ -38,6 +45,10 @@ defmodule PentoWeb.WrongLive do
         </.link>
       <% end %>
     </h2>
+    <pre>
+      <%= @current_user.email %>
+      <%= @session_id %>
+    </pre>
     """
   end
 
