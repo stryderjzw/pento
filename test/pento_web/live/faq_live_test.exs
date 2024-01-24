@@ -5,7 +5,11 @@ defmodule PentoWeb.FAQLiveTest do
   import Pento.SupportFixtures
 
   @create_attrs %{question: "some question", answer: "some answer", vote_count: 42}
-  @update_attrs %{question: "some updated question", answer: "some updated answer", vote_count: 43}
+  @update_attrs %{
+    question: "some updated question",
+    answer: "some updated answer",
+    vote_count: 43
+  }
   @invalid_attrs %{question: nil, answer: nil, vote_count: nil}
 
   defp create_faq(_) do
@@ -14,7 +18,7 @@ defmodule PentoWeb.FAQLiveTest do
   end
 
   describe "Index" do
-    setup [:create_faq]
+    setup [:create_faq, :register_and_log_in_user]
 
     test "lists all faqs", %{conn: conn, faq: faq} do
       {:ok, _index_live, html} = live(conn, ~p"/faqs")
@@ -78,7 +82,7 @@ defmodule PentoWeb.FAQLiveTest do
   end
 
   describe "Show" do
-    setup [:create_faq]
+    setup [:create_faq, :register_and_log_in_user]
 
     test "displays faq", %{conn: conn, faq: faq} do
       {:ok, _show_live, html} = live(conn, ~p"/faqs/#{faq}")
