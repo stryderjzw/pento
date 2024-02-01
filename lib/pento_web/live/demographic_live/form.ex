@@ -26,8 +26,6 @@ defmodule PentoWeb.DemographicLive.Form do
 
   def handle_event("save", %{"demographic" => demographic_params}, socket) do
     params = params_with_user_id(demographic_params, socket)
-    IO.puts("Handling 'save' event and saving demographic record...")
-    IO.inspect(params)
     {:noreply, save_demographic(socket, params)}
   end
 

@@ -17,7 +17,6 @@ defmodule PentoWeb.RatingLive.Form do
   end
 
   defp assign_form(socket, changeset) do
-    IO.puts(inspect(changeset))
     assign(socket, :form, to_form(changeset))
   end
 
@@ -26,7 +25,6 @@ defmodule PentoWeb.RatingLive.Form do
   end
 
   def handle_event("save", %{"rating" => rating_params}, socket) do
-    IO.puts(inspect(rating_params))
     {:noreply, save_rating(socket, rating_params)}
   end
 
