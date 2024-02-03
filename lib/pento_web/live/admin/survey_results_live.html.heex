@@ -1,5 +1,7 @@
 <section class="ml-8">
   <h2 class="font-light text-2xl">Survey Results</h2>
 
-  <pre><%= inspect @products_with_average_ratings %></pre>
+  <div id="survey-results-chart">
+    <%= @chart_svg %>
+  </div>
 </section>
