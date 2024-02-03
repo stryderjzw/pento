@@ -36,6 +36,20 @@ defmodule Pento.Catalog do
   end
 
   @doc """
+  Returns the list of products with average ratings.
+
+  ## Examples
+
+      iex> list_products_with_average_ratings()
+      [{"Chess", 5.0}, ...]
+
+  """
+  def list_products_with_average_ratings do
+    Product.Query.with_average_ratings()
+    |> Repo.all()
+  end
+
+  @doc """
   Gets a single product.
 
   Raises `Ecto.NoResultsError` if the Product does not exist.
