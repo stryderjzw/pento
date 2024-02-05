@@ -52,6 +52,11 @@ defmodule Pento.Catalog do
     |> Repo.all()
   end
 
+  def products_with_zero_ratings do
+    Product.Query.with_zero_ratings()
+    |> Repo.all()
+  end
+
   @doc """
   Gets a single product.
 
