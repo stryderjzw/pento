@@ -1,8 +1,8 @@
 defmodule PentoWeb.Admin.SurveyResultsLive do
   use PentoWeb, :live_component
+  use PentoWeb, :chart_live
 
   alias Pento.Catalog
-  alias Contex.Plot
 
   def update(assigns, socket) do
     {:ok,
@@ -39,7 +39,7 @@ defmodule PentoWeb.Admin.SurveyResultsLive do
 
   def assign_chart_svg(%{assigns: %{chart: chart}} = socket) do
     socket
-    |> assign(:chart_svg, render_bar_chart(chart))
+    |> assign(:chart_svg, render_bar_chart(chart, title(), subtitle(), x_axis(), y_axis()))
   end
 
   def handle_event("age_group_filter", %{"age_group_filter" => age_group_filter}, socket) do
@@ -72,24 +72,9 @@ defmodule PentoWeb.Admin.SurveyResultsLive do
     end
   end
 
-  defp make_bar_chart_dataset(data) do
-    Contex.Dataset.new(data)
-  end
-
   defp assign_chart(%{assigns: %{dataset: dataset}} = socket) do
     socket
     |> assign(:chart, make_bar_chart(dataset))
-  end
-
-  defp make_bar_chart(dataset) do
-    Contex.BarChart.new(dataset)
-  end
-
-  defp render_bar_chart(chart) do
-    Plot.new(500, 400, chart)
-    |> Plot.titles(title(), subtitle())
-    |> Plot.axis_labels(x_axis(), y_axis())
-    |> Plot.to_svg()
   end
 
   defp title do
