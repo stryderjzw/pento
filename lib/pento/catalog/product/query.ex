@@ -30,6 +30,11 @@ defmodule Pento.Catalog.Product.Query do
     |> join(:left, [p, r, u, d], d in Demographic, on: d.user_id == u.id)
   end
 
+  def filter_by_gender(query \\ base(), filter) do
+    query
+    |> apply_gender_filter(filter)
+  end
+
   def filter_by_age_group(query \\ base(), filter) do
     query
     |> apply_age_group_filter(filter)
@@ -38,6 +43,15 @@ defmodule Pento.Catalog.Product.Query do
   def with_zero_ratings(query \\ base()) do
     query
     |> select([p], {p.name, 0})
+  end
+
+  defp apply_gender_filter(query, "all") do
+    query
+  end
+
+  defp apply_gender_filter(query, param) do
+    query
+    |> where([p, r, u, d], d.gender == ^param)
   end
 
   defp apply_age_group_filter(query, "18 and under") do

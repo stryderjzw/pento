@@ -44,10 +44,14 @@ defmodule Pento.Catalog do
       [{"Chess", 5.0}, ...]
 
   """
-  def list_products_with_average_ratings(%{age_group_filter: age_group_filter}) do
+  def list_products_with_average_ratings(%{
+        age_group_filter: age_group_filter,
+        gender_filter: gender_filter
+      }) do
     Product.Query.with_average_ratings()
     |> Product.Query.join_users()
     |> Product.Query.join_demographics()
+    |> Product.Query.filter_by_gender(gender_filter)
     |> Product.Query.filter_by_age_group(age_group_filter)
     |> Repo.all()
   end
