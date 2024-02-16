@@ -35,7 +35,12 @@ defmodule Pento.SupportTest do
 
     test "update_faq/2 with valid data updates the faq" do
       faq = faq_fixture()
-      update_attrs = %{question: "some updated question", answer: "some updated answer", vote_count: 43}
+
+      update_attrs = %{
+        question: "some updated question",
+        answer: "some updated answer",
+        vote_count: 43
+      }
 
       assert {:ok, %FAQ{} = faq} = Support.update_faq(faq, update_attrs)
       assert faq.question == "some updated question"
