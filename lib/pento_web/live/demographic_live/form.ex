@@ -24,6 +24,10 @@ defmodule PentoWeb.DemographicLive.Form do
     assign_form(socket, Survey.change_demographic(demographic))
   end
 
+  def handle_event("validate", _params, socket) do
+    {:noreply, socket}
+  end
+
   def handle_event("save", %{"demographic" => demographic_params}, socket) do
     params = params_with_user_id(demographic_params, socket)
     {:noreply, save_demographic(socket, params)}
