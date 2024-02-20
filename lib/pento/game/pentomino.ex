@@ -9,7 +9,13 @@ defmodule Pento.Game.Pentomino do
             reflected: false,
             location: @default_location
 
-  def new(fields \\ []), do: __struct__(fields)
+  def new(name, rotation \\ 0, reflected \\ false, location \\ @default_location) do
+    if name in @names do
+      __struct__(name: name, rotation: rotation, reflected: reflected, location: location)
+    else
+      raise ArgumentError, "Invalid name: #{name}. Valid names are: #{@names}"
+    end
+  end
 
   def rotate(%{rotation: degrees} = p) do
     %{p | rotation: rem(degrees + 90, 360)}
