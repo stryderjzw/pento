@@ -9,11 +9,18 @@ defmodule Pento.Game.Pentomino do
             reflected: false,
             location: @default_location
 
-  def new(name, rotation \\ 0, reflected \\ false, location \\ @default_location) do
+  def new(options \\ []) do
+    opts = Keyword.merge([rotation: 0, reflected: false, location: @default_location], options)
+
+    name = Keyword.get(opts, :name)
+    rotation = Keyword.get(opts, :rotation)
+    reflected = Keyword.get(opts, :reflected)
+    location = Keyword.get(opts, :location)
+
     if name in @names do
       __struct__(name: name, rotation: rotation, reflected: reflected, location: location)
     else
-      raise ArgumentError, "Invalid name: #{name}. Valid names are: #{@names}"
+      raise ArgumentError, "Invalid name: #{inspect(name)}. Valid names are: #{inspect(@names)}"
     end
   end
 
