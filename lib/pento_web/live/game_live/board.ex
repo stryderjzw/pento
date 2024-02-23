@@ -5,7 +5,7 @@ defmodule PentoWeb.GameLive.Board do
   alias Pento.Game
   import PentoWeb.GameLive.{Colors, Component}
 
-  @puzzle_sizes ~w[default wide widest medium tiny]a
+  @puzzle_sizes [:default, :wide, :widest, :medium, :tiny]
 
   def update(%{puzzle: puzzle, id: id}, socket) do
     {:ok,
