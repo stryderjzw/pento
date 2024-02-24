@@ -36,7 +36,7 @@ defmodule PentoWeb.GameLive.Board do
   def render(assigns) do
     ~H"""
     <div id={@id} phx-window-keydown="key" phx-target={@myself}>
-      <.canvas view_box="0 0 200 70">
+      <.canvas view_box="0 0 200 140">
         <%= for shape <- @shapes do %>
           <.shape
             points={shape.points}
