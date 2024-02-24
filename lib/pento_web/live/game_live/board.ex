@@ -5,8 +5,6 @@ defmodule PentoWeb.GameLive.Board do
   alias Pento.Game
   import PentoWeb.GameLive.{Colors, Component}
 
-  @puzzle_sizes [:default, :wide, :widest, :medium, :tiny]
-
   def update(%{puzzle: puzzle, id: id}, socket) do
     {:ok,
      socket
@@ -20,6 +18,8 @@ defmodule PentoWeb.GameLive.Board do
   end
 
   def assign_board(%{assigns: %{puzzle: puzzle}} = socket) do
+    _puzzles = Board.puzzles()
+
     board =
       puzzle
       |> String.to_existing_atom()
